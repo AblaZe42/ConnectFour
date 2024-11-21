@@ -44,20 +44,11 @@ public class Player {
     }
 
     /**
-     * Adds points to the player's accout
-     *
-     * @param points the amount of points to add
-     */
-    public void addPoints(int points) {
-
-    }
-
-    /**
      * Returns the name of the player
      *
      * @return the player's name
      */
-    public String getName() {
+    public String getPlayer(){
         return playerName;
     }
 
@@ -68,6 +59,10 @@ public class Player {
      */
     public int getWins() {
         return playerWins;
+    }
+
+    public void addWin() {
+        this.playerWins++;
     }
 
 }

@@ -49,8 +49,13 @@ public class Points {
 /* Fills space from the top down
    @param column to determine which space is chosen*/
     public static setFullSpace(int column){
-        if (isColumnFull(column) = true) {
-            return false;
+        if (isColumnFull(column)) {
+            System.out.println("Choose another column");
+        }
+        for(int i=0;i<rows;i++){
+            if(grid[i][column].isSpaceFull() && !grid[i+1][column].isSpaceFull()){
+                
+            }
         }
         
     }
