@@ -1,10 +1,9 @@
 import java.util.*;
-import java.io.*; 
 
 public class ConnectFour {
 
-    Player playerOne;
-    Player playerTwo;
+    private static Player playerOne;
+    private static Player playerTwo;
 
     private static boolean winCondition = false;
     public static void main(String[] args) {
@@ -18,15 +17,17 @@ public class ConnectFour {
         // When somebody finally wins
         if (winCondition) {
             if (playerOne.hasWon){
-                System.out.println(playerOne.name + " wins!");
+                System.out.println(playerOne.playerName + " wins!");
                 playerOne.hasWon = false;
+                playerOne.playerWins++;
             } else if (playerTwo.hasWon){
-                System.out.println(playerTwo.name + " wins!");
+                System.out.println(playerTwo.playerName + " wins!");
                 playerTwo.hasWon = false;
+                playerTwo.playerWins++;
             }
             
 
-            Player.playerWins++;
+            
 
             // If the user wants to play again
             System.out.println("Play again? Y/N: ");
@@ -50,10 +51,10 @@ public class ConnectFour {
         int turn = 0;
         int column;
         System.out.println("Please enter the first player's name and token (X or O):");
-        Player playerOne = new Player(userInput.next(), userInput.next());
+        playerOne = new Player(userInput.next(), userInput.next());
 
         System.out.println("Please enter the second player's name and the other token:");
-        Player playerTwo = new Player(userInput.next(), userInput.next());
+        playerTwo = new Player(userInput.next(), userInput.next());
 
         // Keeps the board looping and updating as long as there is no win
         while (!winCondition && !gameBoard.isSpaceFull()) { // winCondition needs to be coded; checks if anyone has won yet
@@ -73,7 +74,7 @@ public class ConnectFour {
                 gameBoard.updateBoard(column, playerOne.token); // Write method to update the gameBoard with the X in the last column
             //} else if (player == player2) {
             } else if (turn % 2 == 1) { //if (player == player1) { // Write player and player1 to mean something
-                gameBoard.updateBoard(column, playerOne.token);
+                gameBoard.updateBoard(column, playerTwo.token);
             }
 
             if (gameBoard.isColumnFull(column)) {

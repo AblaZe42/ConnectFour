@@ -18,14 +18,14 @@ public class Player {
     /**
      * The player's name
      */
-    private String playerName;
+    public String playerName;
 
     /**
      * The amount of times the player has won
      */
     public int playerWins;
 
-    private boolean hasWon;
+    public boolean hasWon;
 
     public String token;
 
