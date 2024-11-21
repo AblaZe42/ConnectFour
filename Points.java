@@ -9,26 +9,26 @@ public class Points {
     private static final int points;
     private static final int columns = 7;
     private static final int rows = 6;
-    private char[][] grid;
+    private char[][] board;
 
 /* constructor Place initializes instance variables */
     public static Place() {
-        grid = new char[rows][columns];
+        board = new char[rows][columns];
         for (int i = 0; i < rows; i ++) {
             for( int j = 0; j < columns; j++) {
-                grid[i][j] = '.';
+                board[i][j] = '.';
             }
         }  
     }
 /* @param column to determine which space is chosen*/
     public static Space(int column){
-        if(grid[rows][columns].getStatus().equals(Space.Status.TAKEN)){
+        if(board[rows][columns].getStatus().equals(Space.Status.TAKEN)){
             
         }
     }
 /* @returns true if space is taken, false if empty*/    
     public boolean isSpaceFull(){
-        if(grid[rows][columns].getStatus().equals(Space.Status.TAKEN)){
+        if(board[rows][columns].getStatus().equals(Space.Status.TAKEN)){
             return true;
         }
         return false;
@@ -36,12 +36,12 @@ public class Points {
     }
 /* @returns true if column is full, false if empty*/       
     public boolean isColumnFull(int column){
-        if(grid[0][column].isSpaceFull() &&
-            grid[1][column].isSpaceFull() &&
-            grid[2][column].isSpaceFull() &&
-            grid[3][column].isSpaceFull() &&
-            grid[4][column].isSpaceFull() &&
-            grid[5][column].isSpaceFull()){
+        if(board[0][column].isSpaceFull() &&
+            board[1][column].isSpaceFull() &&
+            board[2][column].isSpaceFull() &&
+            board[3][column].isSpaceFull() &&
+            board[4][column].isSpaceFull() &&
+            board[5][column].isSpaceFull()){
                 return true;
             }
         return false;
@@ -53,7 +53,7 @@ public class Points {
             System.out.println("Choose another column");
         }
         for(int i=0;i<rows;i++){
-            if(grid[i][column].isSpaceFull() && !grid[i+1][column].isSpaceFull()){
+            if(board[i][column].isSpaceFull() && !board[i+1][column].isSpaceFull()){
                 
             }
         }

@@ -90,6 +90,18 @@ public class Space {
     // public static boolean Player(String name) {
         
     // }
+    /* @returns true if column is full, false if empty*/       
+    public boolean isColumnFull(int column){
+        if(board[0][column].isSpaceFull() &&
+            board[1][column].isSpaceFull() &&
+            board[2][column].isSpaceFull() &&
+            board[3][column].isSpaceFull() &&
+            board[4][column].isSpaceFull() &&
+            board[5][column].isSpaceFull()){
+                return true;
+            }
+        return false;
+    }
 
     public void updateBoard(int Column, String token){
         boolean hasTokenBeenPlaced = false;

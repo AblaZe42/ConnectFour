@@ -18,12 +18,16 @@ public class Player {
     /**
      * The player's name
      */
-    public String playerName;
+    private String playerName;
 
     /**
      * The amount of times the player has won
      */
     public int playerWins;
+
+    private boolean hasWon;
+
+    public String token;
 
 
     /**
@@ -32,17 +36,23 @@ public class Player {
     public Player() {
         this.playerName = "guest";
         this.playerWins = 0;
+        this.hasWon = false;
+        
     }
 
     /**
      * A constructor method for a player's data to be
      * tracked under a name (account)
      */
-    public Player(String name) {
+    public Player(String name, String token) {
         this.playerName = name;
         this.playerWins = 0;
+        this.hasWon = false;
+        this.token = token;
     }
-
+    public String getToken() {
+        return token;
+    }
     /**
      * Returns the name of the player
      *
