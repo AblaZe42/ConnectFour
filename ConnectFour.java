@@ -179,33 +179,41 @@ public class ConnectFour {
             }
 
 
+            boolean tokenPlaced = false;
 
             if (turn % 2 == 0) {  
-                gameBoard.updateBoard(column, playerOne.token);
-                playerOne.incrementPiecesPlaced();
-                int connectedPieces = gameBoard.calculateConnectedPieces(column, playerOne.token);
-                playerOne.updateMaxConnectedPieces(connectedPieces);
+                tokenPlaced = gameBoard.updateBoard(column, playerOne.token);
+                if (tokenPlaced) {
+                    playerOne.incrementPiecesPlaced();
+                    int connectedPieces = 
+                        gameBoard.calculateConnectedPieces(column, playerOne.token);
+                    playerOne.updateMaxConnectedPieces(connectedPieces);
 
-                System.out.println(playerOne.playerName + 
-                    " has placed " + playerOne.piecesPlaced + " pieces.");
-                System.out.println(playerOne.playerName +
-                    " has connected pieces: " + playerTwo.maxConnectedPieces);
-                System.out.println(" ");
+                    System.out.println(playerOne.playerName + 
+                        " has placed " + playerOne.piecesPlaced + " pieces.");
+                    System.out.println(playerOne.playerName +
+                        " has connected pieces: " + playerOne.maxConnectedPieces);
+                    System.out.println(" ");
+                }
             } else if (turn % 2 == 1) {
-                gameBoard.updateBoard(column, playerTwo.token);
-                playerTwo.incrementPiecesPlaced();
-                int connectedPieces = gameBoard.calculateConnectedPieces(column, playerTwo.token);
-                playerTwo.updateMaxConnectedPieces(connectedPieces);
+                tokenPlaced = gameBoard.updateBoard(column, playerTwo.token);
+                if (tokenPlaced) {
+                    playerTwo.incrementPiecesPlaced();
+                    int connectedPieces = 
+                        gameBoard.calculateConnectedPieces(column, playerTwo.token);
+                    playerTwo.updateMaxConnectedPieces(connectedPieces);
 
-                System.out.println(playerTwo.playerName + 
-                    " has placed " + playerTwo.piecesPlaced + " pieces.");
-                System.out.println(playerTwo.playerName +  
-                    " has connected pieces: " + playerTwo.maxConnectedPieces);
-                System.out.println(" ");
-
+                    System.out.println(playerTwo.playerName + 
+                        " has placed " + playerTwo.piecesPlaced + " pieces.");
+                    System.out.println(playerTwo.playerName +  
+                        " has connected pieces: " + playerTwo.maxConnectedPieces);
+                    System.out.println(" ");
+                }
             }
-            
 
+            if (tokenPlaced) {
+                turn++;
+            }
             
             
             if (gameBoard.checkWin(playerOne.token)
@@ -222,7 +230,9 @@ public class ConnectFour {
                 
                 System.out.println(gameBoard);
             }
-            turn++;
+            
+            
+
         }
 
     }

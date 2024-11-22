@@ -97,20 +97,26 @@ public class Space {
      *
      * @param column the specific column to be updated
      * @param token  the user's token of choice
+     * @return whether the token was successfully placed
      */
-    public void updateBoard(int column, String token) {
-        boolean hasTokenBeenPlaced = false;
-        for (int i = board.length - 1; i >= 0; i--) {
-            if( board[i][column - 1].equals("_")) {
+
+    public boolean updateBoard(int column, String token) {
+        boolean tokenPlaced = false;
+        for (int i = board.length - 1; i >= 0; i--) { // Start from the bottom row
+            if (board[i][column - 1].equals("_")) {
                 board[i][column - 1] = token;
-                hasTokenBeenPlaced = true;
+                tokenPlaced = true;
                 break;
             }
         }
-        if (!hasTokenBeenPlaced) {
-            System.out.println("Column is full, please choose another column");
+
+        if (!tokenPlaced) {
+            System.out.println("Column is full, please choose another column.");
         }
+
+        return tokenPlaced;
     }
+
     
     /**
      * Checks if someone has won
