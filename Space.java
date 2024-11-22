@@ -25,10 +25,12 @@ public class Space {
     public Space() {
         board = new String[rows][cols];
         for(int i = 0;i < rows;i++) {
-            for(int j=0;j < cols;j++) {
+            for(int j=0;j < cols ;j++) {
+                // System.out.println("|");
                 board[i][j] = "_";
                 //board[i][j].setStatus(Status.NOT_TAKEN);
             }
+            // System.out.println("|");
         }
     }
     
@@ -93,7 +95,7 @@ public class Space {
         /* @returns true if column is full, false if empty*/       
         public boolean isColumnFull(int column){
             for (int i = 0; i < rows; i++) {
-                if (board[i][column].equals("_")) {
+                if (board[i][column - 1].equals("_")) {
                     return false;
                 }
             }
@@ -103,8 +105,8 @@ public class Space {
         public void updateBoard(int Column, String token){
         boolean hasTokenBeenPlaced = false;
         for (int i = board.length - 1; i >= 0; i--){
-            if( board[i][Column].equals("_")){
-                board[i][Column] = token;
+            if( board[i][Column - 1].equals("_")){
+                board[i][Column - 1] = token;
                 //board[i][Column].setStatus(Status.TAKEN);
                 hasTokenBeenPlaced = true;
                 break;
@@ -169,9 +171,9 @@ public class Space {
         String s = "";
         for (int i = 0; i < rows; ++i){
             for (int j = 0; j < cols; ++j){
-                s += board[i][j];
+                s += "|" + board[i][j];
             }
-            s += "\n";
+            s += "| \n";
         }
         return s;
     }

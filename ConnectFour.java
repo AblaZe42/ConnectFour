@@ -20,6 +20,7 @@ public class ConnectFour {
                 System.out.println(playerOne.playerName + " wins!");
                 playerOne.hasWon = false;
                 playerOne.playerWins++;
+                System.out.println("Score: " + playerOne.playerName + " " + playerOne.playerWins + " - " + playerTwo.playerWins + " " + playerTwo.playerName);
             } else if (playerTwo.hasWon){
                 System.out.println(playerTwo.playerName + " wins!");
                 playerTwo.hasWon = false;
@@ -59,14 +60,21 @@ public class ConnectFour {
         // Keeps the board looping and updating as long as there is no win
         while (!winCondition && !gameBoard.isSpaceFull()) { // winCondition needs to be coded; checks if anyone has won yet
             System.out.println(gameBoard);
-            System.out.println("Turn " + turn + "\n");
+            System.out.println("Turn " + turn);
+            if (turn % 2 == 0) {
+                System.out.println(playerOne.playerName + "'s turn");
+            } else {
+                System.out.println(playerTwo.playerName + "'s turn");
+                
+            }
             //System.out.println(Player.getPlayer()); // create new method in Player .getPlayer() to see whose turn it is
 
-            System.out.print("Which column would you like to drop an X in? Enter 1, 2, 3, 4, 5, or 6: "); // need playerToken to update between X and O depending on which player
+            System.out.print("Which column would you like to drop an X in? Enter 1, 2, 3, 4, 5, 6 or 7: "); // need playerToken to update between X and O depending on which player
             column = userInput.nextInt();
+            
 
-            if (column < 0 || column > Space.cols){
-                System.out.println("Invalid column. Please enter a value between 0 and 6.");
+            if (column < 1 || column > Space.cols){
+                System.out.println("Invalid column. Please enter a value between 1 and 7.");
                 continue;
             }
 
