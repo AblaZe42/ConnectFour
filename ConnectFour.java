@@ -11,7 +11,11 @@ public class ConnectFour {
 
         //Scanner for user input
         Scanner userInput = new Scanner(System.in);
+        System.out.println("Please enter the first player's name and token (X or O):");
+        playerOne = new Player(userInput.next(), userInput.next());
 
+        System.out.println("Please enter the second player's name and the other token:");
+        playerTwo = new Player(userInput.next(), userInput.next());
         Game(userInput);
         
         // When somebody finally wins
@@ -28,18 +32,22 @@ public class ConnectFour {
             }
             
 
-            
-
-            // If the user wants to play again
-            System.out.println("Play again? Y/N: ");
-            String playAgain = userInput.next();
-            if (playAgain.equals("Y")) {
-                winCondition = false;
-                Game(userInput);
-            } else if (playAgain.equals("N")) {
-                System.out.println("See you next time!");
-            } else {
-                throw new IllegalArgumentException("Put Y or N");
+            boolean KeepGameGoing = true;
+            while (KeepGameGoing){
+                // If the user wants to play again
+                System.out.println("Play again? Y/N: ");
+                String playAgain = userInput.next();
+                if (playAgain.equals("Y")) {
+                    winCondition = false;
+                    Game(userInput);
+                    System.out.println("Score: " + playerOne.playerName + " " + playerOne.playerWins + " - " + playerTwo.playerWins + " " + playerTwo.playerName);
+                } else if (playAgain.equals("N")) {
+                    System.out.println("See you next time!");
+                    KeepGameGoing = false;
+                    System.out.println("Score: " + playerOne.playerName + " " + playerOne.playerWins + " - " + playerTwo.playerWins + " " + playerTwo.playerName);
+                } else {
+                    throw new IllegalArgumentException("Put Y or N");
+                }
             }
         }
     }
@@ -51,11 +59,7 @@ public class ConnectFour {
         // keeps track of which turn it is
         int turn = 0;
         int column;
-        System.out.println("Please enter the first player's name and token (X or O):");
-        playerOne = new Player(userInput.next(), userInput.next());
-
-        System.out.println("Please enter the second player's name and the other token:");
-        playerTwo = new Player(userInput.next(), userInput.next());
+        
 
         // Keeps the board looping and updating as long as there is no win
         while (!winCondition && !gameBoard.isSpaceFull()) { // winCondition needs to be coded; checks if anyone has won yet
@@ -71,7 +75,6 @@ public class ConnectFour {
 
             System.out.print("Which column would you like to drop an X in? Enter 1, 2, 3, 4, 5, 6 or 7: "); // need playerToken to update between X and O depending on which player
             column = userInput.nextInt();
-            
 
             if (column < 1 || column > Space.cols){
                 System.out.println("Invalid column. Please enter a value between 1 and 7.");
@@ -85,9 +88,7 @@ public class ConnectFour {
                 gameBoard.updateBoard(column, playerTwo.token);
             }
 
-            if (gameBoard.isColumnFull(column)) {
-                System.out.println("Column is full. Try again.");
-            }
+            
             
             if (gameBoard.checkWin(playerOne.token)
                 && turn % 2 == 0){
