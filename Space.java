@@ -1,4 +1,11 @@
-
+/**
+ * Creates, updates, and checks the board and the win
+ *
+ * @author Annie Tayson
+ * @author August Pallesen
+ * @author Ania Pruchnik
+ * @author Nirmiti Jhunjhunwala
+ */
 public class Space {
     
     /**
@@ -11,37 +18,32 @@ public class Space {
     */
     private static final int rows = 6;
 
-    // private Status status;
-
     /**
     * Represents the total number of spaces in the game.
     */
     public static final int TOTAL_SPACES = rows * cols;
-    public enum Status{TAKEN, NOT_TAKEN};
-    
 
+    /**
+    * Keeps track of which spaces are taken
+    */
+    public enum Status { TAKEN, NOT_TAKEN } 
+    
+    /**
+    * The board the game will be played with
+    */
     public String[][] board;
 
+    /**
+    * Constructor method for a new game board
+    */
     public Space() {
         board = new String[rows][cols];
         for(int i = 0;i < rows;i++) {
             for(int j=0;j < cols ;j++) {
-                // System.out.println("|");
                 board[i][j] = "_";
-                //board[i][j].setStatus(Status.NOT_TAKEN);
             }
-            // System.out.println("|");
         }
     }
-    
-    // public Status getStatus(){
-    //     return status;
-    // }
-
-    // public void setStatus(Status status){
-    //     this.status = status;
-    // }
-    
     
     /**
     * Checks if a space in the game board or grid is already occupied.
@@ -59,55 +61,42 @@ public class Space {
         return true;
     }
     
+    /**
+     * Returns the game board
+     *
+     * @return the instance field board
+     */
     public String[][] getBoard() {
         return board;
     }
 
-    
-    // /**
-    // * Retrieves the number of wins for the current player.
-    // *
-    // * @return An int representing the number of wins for the player.
-    // */
-    // public static int playerWins() {
-
-    // }
-    
-    // /**
-    // * Adds a specified number of points to the player's score.
-    // *
-    // * @param Adds points to a player.
-    // */
-    // public static void addPoints(int points) {
-
-    // }
-    
-    
-    // /**
-    // * Initializes a new player with the given name.
-    // *
-    // * @param name The name of the player to create.
-    // * @return Returns true if the player was successfully created, false otherwise.
-    // */
-    // public static boolean Player(String name) {
-        
-    // }
-        /* @returns true if column is full, false if empty*/       
-        public boolean isColumnFull(int column){
-            for (int i = 0; i < rows; i++) {
-                if (board[i][column - 1].equals("_")) {
-                    return false;
-                }
+    /**
+     * Checks if the column is full
+     *
+     * @param column the user-specified column
+     *
+     * @return whether the column is full
+     */
+    public boolean isColumnFull(int column){
+        for (int i = 0; i < rows; i++) {
+            if (board[i][column - 1].equals("_")) {
+                return false;
             }
-            return true;
         }
+        return true;
+    }
 
-        public void updateBoard(int Column, String token){
+    /**
+     * Updates the game board by "dropping" the user's token
+     *
+     * @param column the specific column to be updated
+     * @param token  the user's token of choice
+     */
+    public void updateBoard(int Column, String token) {
         boolean hasTokenBeenPlaced = false;
         for (int i = board.length - 1; i >= 0; i--){
             if( board[i][Column - 1].equals("_")){
                 board[i][Column - 1] = token;
-                //board[i][Column].setStatus(Status.TAKEN);
                 hasTokenBeenPlaced = true;
                 break;
             }
@@ -116,9 +105,18 @@ public class Space {
             System.out.println("Column is full, please choose another column");
         }
     }
+    
+    /**
+     * Checks if someone has won
+     *
+     * @param token the user's token of choice
+     *
+     * @return whether the specific token has won
+     */
     public boolean checkWin(String token){
         
-        //check for horizontal win
+/* checks for horizontal win
+*/
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols - 3; j++) {
                 if (board[i][j].equals(token) &&
@@ -130,7 +128,8 @@ public class Space {
             }
         }
         
-        // check for vertical win 
+/* checks for vertical win 
+*/
         for (int i = 0; i < rows - 3; i++){
             for (int j = 0; j < cols; j++){
                 if (board[i][j].equals(token) &&
@@ -141,7 +140,8 @@ public class Space {
                 }
             }
         }
-        // check for diagonal win (from top left to bottom right)
+/* checks for diagonal win (from top left to bottom right)
+*/
         for (int i = 0; i < rows - 3; i++){
             for (int j = 0; j < cols - 3; j++){
                 if (board[i][j].equals(token) &&
@@ -153,7 +153,8 @@ public class Space {
             }
         }
 
-        // check for diagonal win (from top left to bottom right)
+/*checks for diagonal win (from top left to bottom right)
+*/
         for (int i = 3; i < rows; i++){
             for (int j = 0; j < cols - 3; j++){
                 if (board[i][j].equals(token) &&
@@ -167,7 +168,12 @@ public class Space {
         return false;
     }
 
-    public String toString(){
+    /**
+     * Returns the board in a string format
+     *
+     * @return the board as a string
+     */
+    public String toString() {
         String s = "";
         for (int i = 0; i < rows; ++i){
             for (int j = 0; j < cols; ++j){
@@ -175,6 +181,7 @@ public class Space {
             }
             s += "| \n";
         }
+        System.out.println(" 1 2 3 4 5 6 7");
         return s;
     }
 }
