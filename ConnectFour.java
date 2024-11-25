@@ -211,9 +211,7 @@ public class ConnectFour {
                 }
             }
 
-            if (tokenPlaced) {
-                turn++;
-            }
+            
             
             
             if (gameBoard.checkWin(playerOne.token)
@@ -231,7 +229,9 @@ public class ConnectFour {
                 System.out.println(gameBoard);
             }
             
-            
+            if (tokenPlaced) {
+                turn++;
+            }
 
         }
 

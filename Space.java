@@ -127,8 +127,8 @@ public class Space {
      */
     public boolean checkWin(String token) {
         
-/* checks for horizontal win
-*/
+    /* checks for horizontal win
+    */
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS - 3; j++) {
                 if (board[i][j].equals(token) &&
@@ -233,6 +233,8 @@ public class Space {
     
     private int countConnected(int row, int col, int rowDir, int colDir, String token) {
         int count = 0;
+
+        // Count in the specified direction
         for (int i = 0; i < DIRECTIONS; i++) {
             int r = row + i * rowDir;
             int c = col + i * colDir;
@@ -246,6 +248,7 @@ public class Space {
 
         return count;
     }
+
 
     /**
      * Returns the board in a string format
