@@ -29,10 +29,8 @@ public class Space {
     */
     public static final int TOTAL_SPACES = ROWS * COLS;
 
-    /**
-    * Keeps track of which spaces are taken
-    */
-    public enum Status { TAKEN, NOT_TAKEN } 
+
+
     
     /**
     * The board the game will be played with
@@ -183,14 +181,14 @@ public class Space {
 
     /**
      * Calculates the maximum number of connected pieces
-     *  for a given player token in a specific column.
+     * for a given player token in a specific column.
      * 
      * This method checks all four directions (horizontal,
-     *  vertical, diagonal top-left to bottom-right,
+     * vertical, diagonal top-left to bottom-right,
      * diagonal bottom-left to top-right) for the maximum
-     *  number of connected pieces of the specified token
+     * number of connected pieces of the specified token
      * starting from the specified column. It returns the
-     *  maximum number of connected pieces for the token.
+     * maximum number of connected pieces for the token.
      *
      * @param column the column (1-based index) in which the token was placed
      * @param token the player's token to check for connected pieces ("X" or "O")
@@ -218,9 +216,9 @@ public class Space {
      * in a specified direction starting from a given position.
      * 
      * This helper method counts the connected pieces of
-     *  the specified token starting from the given position
+     * the specified token starting from the given position
      * in the specified direction (horizontal, vertical,
-     *  diagonal). It checks for up to 4 connected pieces in
+     * diagonal). It checks for up to 4 connected pieces in
      * the specified direction, returning the count of connected pieces.
      *
      * @param row the starting row position (zero-based index)
@@ -232,12 +230,24 @@ public class Space {
      */
     
     private int countConnected(int row, int col, int rowDir, int colDir, String token) {
-        int count = 0;
+        int count = 1; // Start with the current piece
 
-        // Count in the specified direction
-        for (int i = 0; i < DIRECTIONS; i++) {
+        // Counts the amount of connected in positive direction
+        for (int i = 1; i < DIRECTIONS; i++) {
             int r = row + i * rowDir;
             int c = col + i * colDir;
+
+            if (r < 0 || r >= board.length || c < 0 
+                || c >= board[0].length || !board[r][c].equals(token)) {
+                break;
+            }
+            count++;
+        }
+
+        // Counts the amount of connected in negative direction
+        for (int i = 1; i < DIRECTIONS; i++) {
+            int r = row - i * rowDir;
+            int c = col - i * colDir;
 
             if (r < 0 || r >= board.length || c < 0 
                 || c >= board[0].length || !board[r][c].equals(token)) {

@@ -11,6 +11,21 @@ import java.util.*;
 public class ConnectFour {
 
     /**
+     * ANSI constant to set the text back to white
+     */
+    public static final String ANSI_RESET = "\u001B[0m";
+
+    /**
+     * ANSI constant to set the text to red
+     */
+    public static final String ANSI_RED = "\u001B[31m";
+
+    /**
+     * ANSI constant to set the text to blue
+     */
+    public static final String ANSI_BLUE = "\u001B[34m";
+
+    /**
      * Creates a Player to store player one's data under
      */
     private static Player playerOne;
@@ -32,35 +47,24 @@ public class ConnectFour {
      * @throws IllegalArgumentException if the user inputs something other than Y or N
      */
     public static void main(String[] args) {
-        System.out.println("Welcome to CONNECT FOUR: The game\n");
+        System.out.println("Welcome to CONNECT FOUR: The game!\n");
 
         //Scanner for user input
         Scanner userInput = new Scanner(System.in);
-        
-        System.out.print("Please enter the first player's name and token (X or O): ");
+
+        System.out.print(ANSI_RED + "Please enter the first" +
+                     " player's name (input <name>): " + ANSI_RESET);
         
         String playerOneName = userInput.next();
-        String playerOneToken = userInput.next();
+        String playerOneToken = ANSI_RED + "X" + ANSI_RESET;
 
-        while (!(playerOneToken.equalsIgnoreCase("X") 
-                || playerOneToken.equalsIgnoreCase("O"))) {
-            System.out.println("Invalid input! Please enter X or O");
-            playerOneName = userInput.next();
-            playerOneToken = userInput.next();
-        
-        }
         playerOne = new Player(playerOneName, playerOneToken);
 
     
-        System.out.println("Please enter the second player's name:");
+        System.out.print(ANSI_BLUE + "Please enter the second player's name: " + ANSI_RESET);
 
         String playerTwoName = userInput.next();
-        String playerTwoToken = "";
-        if (playerOneToken.equalsIgnoreCase("X")) {
-            playerTwoToken = "O";
-        } else if (playerOneToken.equalsIgnoreCase("O")) {
-            playerTwoToken = "X";   
-        }
+        String playerTwoToken = ANSI_BLUE + "O" + ANSI_RESET;
 
 
         playerTwo = new Player(playerTwoName, playerTwoToken);
@@ -81,7 +85,7 @@ public class ConnectFour {
                     playerOne.hasWon = false;
                     playerOne.playerWins++;
                     System.out.println("");
-                    System.out.println(playerOne.playerName + " wins!");
+                    System.out.println(ANSI_RED + playerOne.playerName + " wins!" + ANSI_)ESET;
                     System.out.println("Score: " 
                         + playerOne.playerName + " " 
                         + playerOne.playerWins + " - " 
@@ -93,7 +97,7 @@ public class ConnectFour {
                     playerTwo.hasWon = false;
                     playerTwo.playerWins++;
                     System.out.println("");
-                    System.out.println(playerTwo.playerName + " wins!");
+                    System.out.println(ANSI_BLUE + playerTwo.playerName + " wins!" + ANSI_RE)ET;
                     System.out.println("Score: " 
                         + playerOne.playerName + " " 
                         + playerOne.playerWins + " - " 
@@ -151,13 +155,9 @@ public class ConnectFour {
             }
             System.out.println(" ");
 
-            if((turn % 2) == 0) {
-                System.out.print("Which column would you like to" +  
-                                    "drop an in? Enter 1, 2, 3, 4, 5, 6 or 7: "); 
-            } else {
-                System.out.print("Which column would you like" + 
-                                    "to drop an O in? Enter 1, 2, 3, 4, 5, 6 or 7: "); 
-            }
+            System.out.print("Which column would you like to drop" + 
+                            "your tile in? Enter 1, 2, 3, 4, 5, 6 or 7: "); 
+            
             column = -1;
 
             boolean validInput = false;
@@ -227,12 +227,18 @@ public class ConnectFour {
                 playerTwo.hasWon = true;
                 
                 System.out.println(gameBoard);
+            } else {
+                winCondition = true;
+                System.out.println(gameBoard);
             }
             
             if (tokenPlaced) {
                 turn++;
             }
 
+        }
+        if (gameBoard.isSpaceFull()){
+            System.out.println("It's a tie!");
         }
 
     }
