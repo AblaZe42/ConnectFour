@@ -39,6 +39,11 @@ public class ConnectFour {
      * The boolean to check if someone has won
      */
     private static boolean winCondition = false;
+
+    /**
+     * The boolean to check if game is tied
+     */
+    private static boolean tieCondition = false;
     
     /**
      * Controls the before, during, and after of the game
@@ -71,7 +76,7 @@ public class ConnectFour {
         game(userInput);
         
         // When somebody finally wins
-        if (winCondition) {
+        if (winCondition || tieCondition) {
             
             boolean keepGameGoing = true;
 
@@ -85,7 +90,7 @@ public class ConnectFour {
                     playerOne.hasWon = false;
                     playerOne.playerWins++;
                     System.out.println("");
-                    System.out.println(ANSI_RED + playerOne.playerName + " wins!" + ANSI_)ESET;
+                    System.out.println(ANSI_RED + playerOne.playerName + " wins!" + ANSI_RESET);
                     System.out.println("Score: " 
                         + playerOne.playerName + " " 
                         + playerOne.playerWins + " - " 
@@ -97,13 +102,19 @@ public class ConnectFour {
                     playerTwo.hasWon = false;
                     playerTwo.playerWins++;
                     System.out.println("");
-                    System.out.println(ANSI_BLUE + playerTwo.playerName + " wins!" + ANSI_RE)ET;
+                    System.out.println(ANSI_BLUE + playerTwo.playerName + " wins!" + ANSI_RESET);
                     System.out.println("Score: " 
                         + playerOne.playerName + " " 
                         + playerOne.playerWins + " - " 
                         + playerTwo.playerWins + " " 
                         + playerTwo.playerName);
                     System.out.println("");
+                } else {
+                    System.out.println("Score: " 
+                        + playerOne.playerName + " " 
+                        + playerOne.playerWins + " - " 
+                        + playerTwo.playerWins + " " 
+                        + playerTwo.playerName);
                 }
 
                 // If the user wants to play again
@@ -227,19 +238,21 @@ public class ConnectFour {
                 playerTwo.hasWon = true;
                 
                 System.out.println(gameBoard);
-            } else {
-                winCondition = true;
-                System.out.println(gameBoard);
-            }
+            } 
+            // else {
+            //     winCondition = true;
+            //     System.out.println(gameBoard);
+            // } 
             
             if (tokenPlaced) {
                 turn++;
             }
 
+            if (gameBoard.isSpaceFull()){
+                System.out.println("It's a tie!");
+                tieCondition = true;
+                
+            }
         }
-        if (gameBoard.isSpaceFull()){
-            System.out.println("It's a tie!");
-        }
-
     }
 }
